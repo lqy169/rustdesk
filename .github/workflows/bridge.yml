@@ -14,6 +14,7 @@ env:
 jobs:
   generate_bridge:
     runs-on: ${{ matrix.job.os }}
+    environment: mydesk
     strategy:
       fail-fast: false
       matrix:
