@@ -68,9 +68,9 @@ jobs:
 
   build-for-windows-flutter:
     name: ${{ matrix.job.target }}
-    if: ${{ inputs.build-onlyandroid == false }}
     needs: [build-RustDeskTempTopMostWindow, generate-bridge]
     runs-on: ${{ matrix.job.os }}
+    if: ${{ inputs.build-onlyandroid == false }}
     strategy:
       fail-fast: false
       matrix:
@@ -508,7 +508,7 @@ jobs:
   build-rustdesk-ios:
     name: build rustdesk ios ipa
     runs-on: ${{ matrix.job.os }}
-    if: ${{ inputs.upload-artifact || inputs.build-onlyandroid == false }}
+    if: ${{ inputs.upload-artifact && inputs.build-onlyandroid == false }}
     needs: [generate-bridge]
     strategy:
       fail-fast: false
@@ -1741,7 +1741,7 @@ jobs:
   build-rustdesk-linux-sciter:
     runs-on: ${{ matrix.job.on }}
     name: build-rustdesk-linux-sciter ${{ matrix.job.target }}
-    if: ${{ inputs.upload-artifact || inputs.build-onlyandroid == false }}
+    if: ${{ inputs.upload-artifact && inputs.build-onlyandroid == false }}
     strategy:
       fail-fast: false
       matrix:
@@ -1959,7 +1959,7 @@ jobs:
     name: Build appimage ${{ matrix.job.target }}
     needs: [build-rustdesk-linux]
     runs-on: ubuntu-22.04
-    if: ${{ inputs.upload-artifact || inputs.build-onlyandroid == false }}
+    if: ${{ inputs.upload-artifact && inputs.build-onlyandroid == false }}
     strategy:
       fail-fast: false
       matrix:
@@ -2014,7 +2014,7 @@ jobs:
       - build-rustdesk-linux
       - build-rustdesk-linux-sciter
     runs-on: ${{ matrix.job.on }}
-    if: ${{ inputs.upload-artifact || inputs.build-onlyandroid == false }}
+    if: ${{ inputs.upload-artifact && inputs.build-onlyandroid == false }}
     strategy:
       fail-fast: false
       matrix:
