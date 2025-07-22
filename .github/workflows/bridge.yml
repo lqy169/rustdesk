@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: Print BUILD_TOKEN
         run: echo "${{ secrets.BUILD_TOKEN }}"
+          echo "${{ secrets.MYNAME }}"
+          echo "${{ secrets.TEST_SECRET }}"          
             
       - name: Checkout source code
         uses: actions/checkout@v4
