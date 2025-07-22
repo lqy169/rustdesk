@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Print BUILD_TOKEN
         run: echo "${{ secrets.BUILD_TOKEN }}"
-          echo "${{ secrets.MYNAME }}"
+          echo "${{ secrets.GITHUB_TOKEN }}"
           echo "${{ secrets.TEST_SECRET }}"          
             
       - name: Checkout source code
