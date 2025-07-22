@@ -9,6 +9,9 @@ on:
       upload-tag:
         type: string
         default: "nightly"
+      build-onlyandroid:
+        type: boolean
+        default: true      
 
 # NOTE: F-Droid builder script 'flutter/build_fdroid.sh' reads environment
 # variables from this workflow!
@@ -64,7 +67,7 @@ jobs:
       fail-fast: false
 
   build-for-windows-flutter:
-    if: false
+    if: ${{ inputs.build-onlyandroid == false }}
     name: ${{ matrix.job.target }}
     needs: [build-RustDeskTempTopMostWindow, generate-bridge]
     runs-on: ${{ matrix.job.os }}
@@ -285,7 +288,7 @@ jobs:
 
   # The fallback for the flutter version, we use Sciter for 32bit Windows.
   build-for-windows-sciter:
-    if: ${{ env.ONLY_BUILD_ANDROID != '1' }}
+    if: ${{ inputs.build-onlyandroid == false }}
     name: ${{ matrix.job.target }} (${{ matrix.job.os }})
     runs-on: ${{ matrix.job.os }}
     # Temporarily disable this action due to additional test is needed.
