@@ -45,6 +45,7 @@ env:
   MACOS_P12_BASE64: "${{ secrets.MACOS_P12_BASE64 }}"
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
   SIGN_BASE_URL: "${{ secrets.SIGN_BASE_URL }}"
+  ONLY_BUILD_ANDROID: "${{ vars.ONLY_BUILD_ANDROID }}"
 
 jobs:
   generate-bridge:
@@ -63,6 +64,7 @@ jobs:
       fail-fast: false
 
   build-for-windows-flutter:
+    if: env.ONLY_BUILD_ANDROID != '1'
     name: ${{ matrix.job.target }}
     needs: [build-RustDeskTempTopMostWindow, generate-bridge]
     runs-on: ${{ matrix.job.os }}
@@ -283,6 +285,7 @@ jobs:
 
   # The fallback for the flutter version, we use Sciter for 32bit Windows.
   build-for-windows-sciter:
+    if: env.ONLY_BUILD_ANDROID != '1'
     name: ${{ matrix.job.target }} (${{ matrix.job.os }})
     runs-on: ${{ matrix.job.os }}
     # Temporarily disable this action due to additional test is needed.
