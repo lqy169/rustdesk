@@ -190,7 +190,7 @@ class ServerModel with ChangeNotifier {
 
     // Initial keyboard status is off on mobile
     if (isMobile) {
-      bind.mainSetOption(key: kOptionEnableKeyboard, value: 'N');
+      bind.mainSetOption(key: kOptionEnableKeyboard, value: 'Y');
     }
   }
 
@@ -420,6 +420,7 @@ class ServerModel with ChangeNotifier {
       if (!await AndroidPermissionManager.check(kManageExternalStorage)) {
         await AndroidPermissionManager.request(kManageExternalStorage);
       }
+      /*
       final res = await parent.target?.dialogManager
           .show<bool>((setState, close, context) {
         submit() => close(true);
@@ -441,7 +442,8 @@ class ServerModel with ChangeNotifier {
       });
       if (res == true) {
         startService();
-      }
+      }*/
+      startService();
     }
   }
 
